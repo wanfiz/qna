@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-id="th-modified">Walimatulurus - Qistina & Afiq</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#fbf9f1',
+                            100: '#f5f0db',
+                            200: '#ebd9a8',
+                            300: '#e2d29b',
+                            400: '#d1b572',
+                            500: '#c5a059',
+                            600: '#b08843',
+                            700: '#8c6830'
+                        },
+                        rose: {
+                            50: '#fff5f7',
+                            100: '#ffe4e8',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            800: '#9f1239',
+                            900: '#881337',
+                            950: '#4c0519'
+                        }
+                    },
+                    fontFamily: {
+                        cursive: ['Alex Brush', 'cursive'],
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* MOBILE FULL-PAGE FIX */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+            min-height: 100svh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        img,
+        video {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container,
+        .wrapper,
+        main,
+        #app,
+        #root,
+        #mainContainer {
+            max-width: 100%;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container,
+            .wrapper,
+            main,
+            #app,
+            #root,
+            #mainContainer {
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* Mobile Viewport & Dynamic Height Fixes */
+        #coverScreen {
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+        }
+
+        .font-cursive { font-family: 'Alex Brush', cursive; }
+        .font-serif { font-family: 'Cinzel', serif; }
+
+        /* Glowing text effect for bride & groom names */
+        .name-glow {
+            text-shadow: 0 0 12px rgba(244, 63, 94, 0.25), 0 0 20px rgba(197, 160, 89, 0.2);
+        }
+
+        /* Floating particles / Floating hearts animation */
+        @keyframes heart-float {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.6) rotate(0deg);
+            }
+            50% {
+                opacity: 0.85;
+                transform: translateY(-22px) scale(1.1) rotate(10deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-45px) scale(0.7) rotate(-10deg);
+            }
+        }
+
+        .floating-heart {
+            position: absolute;
+            animation: heart-float 3.5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        /* Pulse Subtle Animation */
+        @keyframes pulse-subtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .btn-pulse {
+            animation: pulse-subtle 2.5s infinite ease-in-out;
+        }
+
+        /* Floating Animation for Floral Elements */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float-slow 4s ease-in-out infinite;
+        }
+
+        /* Pink Gradient Shimmer effect on buttons */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .btn-shimmer {
+            background: linear-gradient(90deg, #f43f5e 0%, #fda4af 35%, #c5a059 65%, #f43f5e 100%);
+            background-size: 200% 100%;
+            animation: shimmer 4s infinite;
+        }
+
+        /* Scroll Reveal Effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Canvas Overlay for Falling Petals */
+        #petalCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 35;
+        }
+    </style>
+<meta property="og:title" content="Walimatulurus - Qistina & Afiq" data-id="th-modified" ><meta name="description" content="KAD KAHWIN QNA" data-id="th-modified" ><meta property="og:description" content="KAD KAHWIN QNA" data-id="th-modified" ><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified" ><meta property="og:image:width" content="1501" data-id="th-modified" ><meta property="og:image:height" content="1501" data-id="th-modified" ><meta property="og:image:type" content="image/png" data-id="th-modified" ><meta property="og:url" content="https://kadkahwindigitalqna.tiiny.site/" data-id="th-modified" ><meta property="og:type" content="website" data-id="th-modified" ><script defer data-domain="kadkahwindigitalqna.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<body class="bg-slate-900 flex justify-center items-center min-h-screen text-slate-800 antialiased selection:bg-rose-500 selection:text-white">
+
+    <canvas id="petalCanvas"></canvas>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-rose-950/95 text-white text-xs px-6 py-3 rounded-full shadow-2xl backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none -translate-y-4 flex items-center gap-2 border border-rose-400/40">
+        <i class="fa-solid fa-circle-check text-rose-300 text-sm"></i>
+        <span id="toastMsg">Maklumat dikemaskini</span>
+    </div>
+
+    <!-- Container Utama Kad (Mobile Frame) -->
+    <div id="mainContainer" class="w-full max-w-md bg-gradient-to-b from-rose-50 via-pink-50/70 to-rose-100/80 min-h-screen shadow-2xl relative overflow-hidden pb-20 border-x border-rose-200/60">
+
+        <!-- SKRIN SAMPUL / COVER -->
+        <div id="coverScreen" class="fixed inset-0 z-50 max-w-md mx-auto flex flex-col justify-between items-center p-6 text-center transition-all duration-700 overflow-hidden relative">
+            
+            <!-- Full Screen Cover Background Image -->
+            <img src="https://lh3.googleusercontent.com/d/1pmy_YQb_uc5zAz0pWDRt7HSLuC34nyJs" class="absolute inset-0 w-full h-full object-cover object-center" alt="Latar Belakang Muka Depan">
+            <div class="absolute inset-0 bg-gradient-to-b from-rose-950/70 via-pink-950/45 to-rose-950/80 backdrop-blur-[1px]"></div>
+            
+            <!-- Floral Corner Top Left -->
+            <div class="absolute top-0 left-0 w-28 h-28 pointer-events-none animate-float z-10 opacity-90">
+                <svg viewBox="0 0 120 120" fill="none" class="w-full h-full text-rose-300">
+                    <path d="M0 0C40 10 70 30 70 80C40 50 20 40 0 0Z" fill="url(#pinkGrad1)" opacity="0.85"></path>
+                    <path d="M0 0C15 40 35 70 80 70C50 40 40 15 0 0Z" fill="url(#goldGrad1)" opacity="0.65"></path>
+                    <circle cx="28" cy="28" r="6" fill="#fb7185"></circle>
+                    <circle cx="28" cy="28" r="2.5" fill="#ffffff"></circle>
+                    <circle cx="46" cy="20" r="4.5" fill="#c5a059"></circle>
+                    <circle cx="20" cy="46" r="4.5" fill="#fda4af"></circle>
+                    <path d="M10 65 Q25 45 65 25" stroke="#c5a059" stroke-width="1.5" stroke-dasharray="3,3"></path>
+                    <defs>
+                        <linearGradient id="pinkGrad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fb7185"></stop><stop offset="100%" stop-color="#fecdd3"></stop></linearGradient>
+                        <linearGradient id="goldGrad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#c5a059"></stop><stop offset="100%" stop-color="#ebd9a8"></stop></linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <!-- Floral Corner Top Right -->
+            <div class="absolute top-0 right-0 w-28 h-28 pointer-events-none animate-float scale-x-[-1] z-10 opacity-90">
+                <svg viewBox="0 0 120 120" fill="none" class="w-full h-full text-rose-300">
+                    <path d="M0 0C40 10 70 30 70 80C40 50 20 40 0 0Z" fill="url(#pinkGrad1)" opacity="0.85"></path>
+                    <path d="M0 0C15 40 35 70 80 70C50 40 40 15 0 0Z" fill="url(#goldGrad1)" opacity="0.65"></path>
+                    <circle cx="28" cy="28" r="6" fill="#fb7185"></circle>
+                    <circle cx="28" cy="28" r="2.5" fill="#ffffff"></circle>
+                </svg>
+            </div>
+
+            <!-- Header Section -->
+            <div class="pt-6 relative z-10 space-y-2">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/35 border border-pink-300/40 shadow-sm backdrop-blur-md">
+                    <i class="fa-solid fa-heart text-[9px] text-pink-300"></i>
+                    <p class="text-pink-200 tracking-[0.25em] uppercase text-[9.5px] font-serif font-semibold">Majlis Walimatulurus</p>
+                    <i class="fa-solid fa-heart text-[9px] text-pink-300"></i>
+                </div>
+                <h1 class="text-5xl font-cursive text-transparent bg-clip-text bg-gradient-to-r from-pink-100 via-rose-100 to-amber-200 drop-shadow-md font-semibold leading-tight">Qistina & Afiq</h1>
+                <p class="text-pink-100 text-[11px] tracking-widest uppercase font-medium drop-shadow-sm">Sabtu, 21 November 2026</p>
+            </div>
+
+            <!-- Middle Section -->
+            <div class="my-auto py-3 relative z-10 space-y-3">
+                <p class="text-[11px] text-pink-100 font-medium tracking-wide drop-shadow-sm">Kepada YBhg / Dato' / Datin / Tuan / Puan / Encik / Cik:</p>
+                <div class="inline-block bg-black/35 border border-pink-300/40 px-5 py-1.5 rounded-full shadow-md text-pink-100 font-semibold text-xs tracking-wide backdrop-blur-md">
+                    Tetamu Jemputan
+                </div>
+            </div>
+
+            <!-- Action Button Section -->
+            <div class="pb-4 relative z-10 w-full flex flex-col items-center gap-3">
+                <button onclick="openCard()" class="btn-pulse btn-shimmer text-white font-semibold px-8 py-3.5 rounded-full shadow-xl flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 text-xs tracking-wider uppercase border border-white/40">
+                    <i class="fa-solid fa-envelope-open-text text-sm"></i>
+                    <span>Buka Undangan</span>
+                </button>
+
+                <!-- Floral Bottom Garland -->
+                <div class="w-full flex justify-center opacity-80 pt-1">
+                    <svg class="w-32 h-6 text-rose-300" viewBox="0 0 160 30" fill="none">
+                        <path d="M10 15 Q40 0 80 15 Q120 30 150 15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"></path>
+                        <circle cx="80" cy="15" r="5" fill="#f43f5e"></circle>
+                        <circle cx="80" cy="15" r="2" fill="#ffffff"></circle>
+                        <circle cx="50" cy="10" r="3.5" fill="#c5a059"></circle>
+                        <circle cx="110" cy="20" r="3.5" fill="#c5a059"></circle>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- REKAAN KAD KAHWIN UTAMA -->
+        <div id="cardContent" class="hidden opacity-0 transition-opacity duration-1000">
+
+            <!-- PEMAIN MUZIK (Floating Button) -->
+            <button onclick="toggleAudio()" id="musicBtn" class="fixed bottom-18 right-5 z-40 bg-gradient-to-r from-rose-500 to-pink-600 text-white w-11 h-11 rounded-full shadow-2xl flex items-center justify-center border-2 border-white focus:outline-none hover:scale-110 active:scale-90 transition">
+                <i id="musicIcon" class="fa-solid fa-music animate-spin" style="animation-duration: 4s;"></i>
+            </button>
+            <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-acoustic-guitar-114227.mp3"></audio>
+
+            <!-- HERO HEADER WITH FLORAL & PINK OVERLAY -->
+            <section class="relative h-[80vh] flex flex-col justify-end items-center text-center p-6 text-white overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/d/1YrDrWe31HM_gdoDGMRO4QdSklHdt7Pac" class="absolute inset-0 w-full h-full object-cover object-center" alt="Gambar Qistina & Afiq">
+                <div class="absolute inset-0 bg-gradient-to-t from-rose-950 via-rose-900/55 to-pink-900/25"></div>
+
+                <div class="relative z-10 mb-8 space-y-2.5">
+                    <span class="text-rose-200 tracking-[0.25em] text-[10px] font-serif uppercase px-3 py-1 bg-black/20 rounded-full backdrop-blur-xs border border-white/20 inline-block font-semibold">Majlis Walimatulurus</span>
+                    <h2 class="text-6xl font-cursive text-pink-100 drop-shadow-md font-semibold leading-tight">Qistina & Afiq</h2>
+                    <div class="w-16 h-[1.5px] bg-gradient-to-r from-transparent via-rose-300 to-transparent mx-auto my-1.5"></div>
+                    <p class="text-[11px] font-medium text-rose-100 tracking-widest uppercase">21 November 2026 | Ketereh, Kelantan</p>
+                </div>
+            </section>
+
+            <!-- SURAH / PETIKAN SUCI WITH FLORAL BORDER -->
+            <section class="py-7 px-6 text-center bg-gradient-to-b from-rose-50 via-pink-50 to-rose-100/60 border-b border-rose-200/80 relative reveal space-y-3">
+                <div class="flex justify-center text-rose-400">
+                    <svg class="w-28 h-6" viewBox="0 0 120 30" fill="none">
+                        <path d="M10 15 Q 30 0 60 15 Q 90 30 110 15" stroke="currentColor" stroke-width="1.5"></path>
+                        <circle cx="60" cy="15" r="4.5" fill="#f43f5e"></circle>
+                        <circle cx="60" cy="15" r="1.5" fill="#ffffff"></circle>
+                        <circle cx="35" cy="10" r="3" fill="#c5a059"></circle>
+                        <circle cx="85" cy="20" r="3" fill="#c5a059"></circle>
+                    </svg>
+                </div>
+
+                <p class="font-serif text-xl text-rose-800 leading-loose" dir="rtl">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+                
+                <p class="text-xs text-slate-600 leading-relaxed italic px-1">
+                    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."
+                </p>
+                <p class="text-[10.5px] text-rose-600 font-bold tracking-wider uppercase">(Surah Ar-Rum: 21)</p>
+            </section>
+
+            <!-- MAKLUMAT MEMPELAI WITH SWEET PINK CARDS -->
+            <section class="py-8 px-6 text-center space-y-6 bg-gradient-to-b from-white via-pink-50/50 to-white relative reveal">
+                
+                <div class="space-y-2">
+                    <span class="text-[10px] uppercase tracking-[0.25em] text-rose-600 font-bold px-3.5 py-1 bg-rose-50 rounded-full border border-rose-200 inline-block">Undangan Tulus Ikhlas</span>
+                    
+                    <p class="text-slate-700 font-medium text-xs leading-relaxed pt-2">
+                        Dengan izin Allah SWT ke atas hamba-Nya yang merancang, kami
+                    </p>
+
+                    <!-- Nama Ibu Bapa Pengantin Lelaki -->
+                    <div class="py-1">
+                        <p class="text-rose-900 font-bold text-sm leading-tight">Mohd Zapuan bin Md Zain</p>
+                        <p class="text-rose-500 font-cursive text-base my-0.5">&</p>
+                        <p class="text-rose-900 font-bold text-sm leading-tight">S.Asmat binti Abdul Ghani</p>
+                    </div>
+
+                    <p class="text-slate-700 font-medium text-xs leading-relaxed pt-2">
+                        dengan segala hormat penuh kesyukuran mengundang YB / Dato' / Datin / Tuan / Puan / Encik / Cik suami isteri serta keluarga ke majlis perkahwinan anakanda kami
+                    </p>
+                </div>
+
+                <!-- Bride & Groom Card Container -->
+                <div class="space-y-5 py-1 relative">
+                    
+                    <!-- Pengantin Perempuan -->
+                    <div class="p-5 bg-gradient-to-br from-rose-50 via-pink-100/50 to-rose-100 rounded-3xl border border-rose-300/80 shadow-md relative overflow-hidden group backdrop-blur-xs">
+                        
+                        <svg class="absolute top-0 right-0 w-14 h-14 text-rose-300 opacity-60 pointer-events-none" viewBox="0 0 60 60" fill="currentColor">
+                            <path d="M60 0 C40 10 30 25 30 60 C20 30 10 20 0 0 Z"></path>
+                            <circle cx="45" cy="15" r="3.5" fill="#f43f5e"></circle>
+                        </svg>
+
+                        <div class="floating-heart text-rose-400 text-xs" style="top: 15%; left: 10%; animation-delay: 0s;"><i class="fa-solid fa-heart"></i></div>
+                        <div class="floating-heart text-rose-300 text-sm" style="top: 25%; right: 12%; animation-delay: 1.2s;"><i class="fa-solid fa-heart"></i></div>
+                        
+                        <div class="relative z-10 space-y-1">
+                            <span class="text-[10px] uppercase font-bold text-rose-500 tracking-widest block">Pengantin Perempuan</span>
+                            <h4 class="text-3xl font-cursive text-rose-700 font-bold name-glow leading-snug">Qistina Amirah binti Mazlan</h4>
+                            <div class="w-10 h-[1px] bg-rose-300 mx-auto my-1.5"></div>
+                            <p class="text-[11px] text-slate-600 font-medium">Puteri kepada En. Mazlan & Pn. Noor Asfarizan</p>
+                        </div>
+                    </div>
+
+                    <!-- Heart Divider -->
+                    <div class="text-rose-500 font-serif text-lg flex items-center justify-center gap-3">
+                        <span class="w-12 h-[1px] bg-gradient-to-r from-transparent to-rose-300"></span>
+                        <div class="w-8 h-8 rounded-full bg-rose-100 border border-rose-300 flex items-center justify-center shadow-inner text-rose-600">
+                            <i class="fa-solid fa-heart text-[11px] animate-bounce"></i>
+                        </div>
+                        <span class="w-12 h-[1px] bg-gradient-to-l from-transparent to-rose-300"></span>
+                    </div>
+
+                    <!-- Pengantin Lelaki (Updated with parents' names) -->
+                    <div class="p-5 bg-gradient-to-br from-pink-50 via-rose-100/40 to-pink-100 rounded-3xl border border-rose-300/80 shadow-md relative overflow-hidden group backdrop-blur-xs">
+                        
+                        <svg class="absolute top-0 left-0 w-14 h-14 text-rose-300 opacity-60 pointer-events-none scale-x-[-1]" viewBox="0 0 60 60" fill="currentColor">
+                            <path d="M60 0 C40 10 30 25 30 60 C20 30 10 20 0 0 Z"></path>
+                            <circle cx="45" cy="15" r="3.5" fill="#c5a059"></circle>
+                        </svg>
+
+                        <div class="floating-heart text-pink-400 text-xs" style="top: 20%; right: 10%; animation-delay: 0.6s;"><i class="fa-solid fa-heart"></i></div>
+                        <div class="floating-heart text-rose-400 text-sm" style="top: 30%; left: 12%; animation-delay: 1.8s;"><i class="fa-solid fa-heart"></i></div>
+
+                        <div class="relative z-10 space-y-1">
+                            <span class="text-[10px] uppercase font-bold text-rose-500 tracking-widest block">Pengantin Lelaki</span>
+                            <h4 class="text-3xl font-cursive text-rose-700 font-bold name-glow leading-snug">Afiq Aiman bin Mohd Zapuan</h4>
+                            <div class="w-10 h-[1px] bg-rose-300 mx-auto my-1.5"></div>
+                            <p class="text-[11px] text-slate-600 font-medium">Putera kepada En. Mohd Zapuan & Pn. S.Asmat</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- COUNTDOWN TIMER -->
+            <section class="py-7 px-6 bg-gradient-to-br from-rose-100/90 via-pink-100 to-rose-200/80 text-center border-y border-rose-300/80 relative reveal space-y-3">
+                <h3 class="font-serif text-rose-800 font-bold text-xs uppercase tracking-[0.2em]">Menghitung Hari Majlis</h3>
+                
+                <div class="grid grid-cols-4 gap-2 text-center max-w-xs mx-auto" id="countdown">
+                    <div class="bg-white/90 py-2.5 px-2 rounded-2xl shadow-sm border border-rose-200 backdrop-blur-xs">
+                        <span id="days" class="block text-2xl font-bold text-rose-600 leading-tight">00</span>
+                        <span class="text-[9px] text-slate-500 uppercase font-semibold tracking-wider">Hari</span>
+                    </div>
+                    <div class="bg-white/90 py-2.5 px-2 rounded-2xl shadow-sm border border-rose-200 backdrop-blur-xs">
+                        <span id="hours" class="block text-2xl font-bold text-rose-600 leading-tight">00</span>
+                        <span class="text-[9px] text-slate-500 uppercase font-semibold tracking-wider">Jam</span>
+                    </div>
+                    <div class="bg-white/90 py-2.5 px-2 rounded-2xl shadow-sm border border-rose-200 backdrop-blur-xs">
+                        <span id="minutes" class="block text-2xl font-bold text-rose-600 leading-tight">00</span>
+                        <span class="text-[9px] text-slate-500 uppercase font-semibold tracking-wider">Minit</span>
+                    </div>
+                    <div class="bg-white/90 py-2.5 px-2 rounded-2xl shadow-sm border border-rose-200 backdrop-blur-xs">
+                        <span id="seconds" class="block text-2xl font-bold text-rose-600 leading-tight">00</span>
+                        <span class="text-[9px] text-slate-500 uppercase font-semibold tracking-wider">Saat</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ATUR CARA & LOKASI COMBINED SECTION -->
+            <section id="locationSection" class="py-8 px-6 bg-gradient-to-b from-white via-pink-50/40 to-rose-50/60 space-y-6 reveal">
+                
+                <!-- Tarikh & Masa Header -->
+                <div class="text-center space-y-1.5">
+                    <div class="w-11 h-11 bg-gradient-to-br from-rose-400 to-pink-500 text-white rounded-full flex items-center justify-center mx-auto text-lg shadow-md border-2 border-white mb-2">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <h3 class="font-serif text-slate-800 font-bold text-sm">Tarikh & Masa Majlis</h3>
+                    <p class="text-xs text-rose-700 font-semibold">Sabtu, 21 November 2026</p>
+                    <p class="text-xs text-slate-600 font-medium">12:00 Tengah Hari - 6:00 Petang</p>
+                </div>
+
+                <!-- Combined Card: Atur Cara + Lokasi -->
+                <div class="bg-gradient-to-b from-rose-50/90 via-pink-50/80 to-rose-50/90 p-5 rounded-3xl border border-rose-300/80 shadow-md space-y-5 backdrop-blur-xs relative overflow-hidden">
+                    
+                    <!-- Atur Cara Block -->
+                    <div class="text-center space-y-3 pb-4 border-b border-rose-200/90">
+                        <h4 class="font-serif text-xs font-bold uppercase tracking-wider text-rose-800 flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-clock text-rose-500"></i> Atur Cara Majlis
+                        </h4>
+                        
+                        <div class="text-xs text-slate-700 space-y-2 pt-1 max-w-xs mx-auto">
+                            <div class="flex justify-between items-center bg-white/70 px-3 py-1.5 rounded-xl border border-rose-200/60">
+                                <span>Jamuan Majlis</span>
+                                <span class="font-semibold text-rose-700">12:00 TGH - 6:00 PTG</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-white/70 px-3 py-1.5 rounded-xl border border-rose-200/60">
+                                <span>Ketibaan Pengantin</span>
+                                <span class="font-semibold text-rose-700">2:00 PTG</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lokasi Block -->
+                    <div class="text-center space-y-2.5">
+                        <h4 class="font-serif text-xs font-bold uppercase tracking-wider text-rose-800 flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-rose-500"></i> Lokasi Majlis
+                        </h4>
+
+                        <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                            Lot 1062 (A) Kampung Laka,<br>
+                            16450 Ketereh, Kelantan
+                        </p>
+
+                        <!-- Action Buttons including WhatsApp for Parents -->
+                        <div class="flex flex-col gap-2.5 pt-2">
+                            <a href="https://maps.app.goo.gl/HioFi9Y6bKHeajkj7" target="_blank" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition hover:scale-[1.01] active:scale-95">
+                                <i class="fa-solid fa-map-location-dot text-sm"></i> Petunjuk Arah (Google Maps)
+                            </a>
+
+                            <a href="https://wa.me/601155516569" target="_blank" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition hover:scale-[1.01] active:scale-95">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp (Sofiah)
+                            </a>
+
+                            <a href="https://wa.me/60199788195" target="_blank" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition hover:scale-[1.01] active:scale-95">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp (Mohd Zapuan - Bapa Pengantin Lelaki)
+                            </a>
+
+                            <a href="https://wa.me/601117978340" target="_blank" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition hover:scale-[1.01] active:scale-95">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp (S.Asmat - Ibu Pengantin Lelaki)
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- FOOTER BAR (NAVIGATION QUICK ACCESS) -->
+            <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t border-rose-200/80 py-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] px-4 flex justify-around items-center z-40 shadow-lg text-[10px] text-slate-600">
+                <button onclick="goToHomepage()" class="flex flex-col items-center hover:text-rose-600 transition gap-0.5">
+                    <i class="fa-solid fa-house text-base text-rose-500"></i>
+                    <span>Sampul</span>
+                </button>
+                <a href="#countdown" class="flex flex-col items-center hover:text-rose-600 transition gap-0.5">
+                    <i class="fa-regular fa-clock text-base text-rose-500"></i>
+                    <span>Tarikh</span>
+                </a>
+                <a href="#locationSection" class="flex flex-col items-center hover:text-rose-600 transition gap-0.5">
+                    <i class="fa-solid fa-map-location-dot text-base text-rose-500"></i>
+                    <span>Lokasi</span>
+                </a>
+                <a href="https://wa.me/601155516569" target="_blank" class="flex flex-col items-center hover:text-rose-600 transition gap-0.5">
+                    <i class="fa-brands fa-whatsapp text-base text-emerald-600"></i>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Custom Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+            }, 3200);
+        }
+
+        // Buka Kad & Main Muzik
+        function openCard() {
+            const cover = document.getElementById('coverScreen');
+            const content = document.getElementById('cardContent');
+            const audio = document.getElementById('bgMusic');
+
+            cover.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+            setTimeout(() => {
+                cover.style.display = 'none';
+                content.classList.remove('hidden');
+                setTimeout(() => {
+                    content.classList.remove('opacity-0');
+                    initScrollReveal();
+                }, 50);
+            }, 700);
+
+            // Play background music
+            audio.play().catch(e => console.log("Autoplay blocked:", e));
+            startPetalAnimation();
+        }
+
+        // Kembali ke Homepage / Sampul
+        function goToHomepage() {
+            const cover = document.getElementById('coverScreen');
+            const content = document.getElementById('cardContent');
+
+            content.classList.add('opacity-0');
+            setTimeout(() => {
+                content.classList.add('hidden');
+                cover.style.display = 'flex';
+                setTimeout(() => {
+                    cover.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                }, 50);
+            }, 500);
+        }
+
+        // Toggle Audio
+        function toggleAudio() {
+            const audio = document.getElementById('bgMusic');
+            const icon = document.getElementById('musicIcon');
+            
+            if (audio.paused) {
+                audio.play();
+                icon.className = "fa-solid fa-music animate-spin";
+            } else {
+                audio.pause();
+                icon.className = "fa-solid fa-volume-xmark";
+            }
+        }
+
+        // Countdown Timer Logic (21 November 2026)
+        const weddingDate = new Date("November 21, 2026 12:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance > 0) {
+                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+
+        // Scroll Reveal Animation (Intersection Observer)
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        // Petal Particle Canvas Effect
+        function startPetalAnimation() {
+            const canvas = document.getElementById('petalCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const petals = Array.from({ length: 22 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height - height,
+                size: Math.random() * 8 + 6,
+                speedY: Math.random() * 1.2 + 0.8,
+                speedX: Math.random() * 0.8 - 0.4,
+                rotation: Math.random() * 360,
+                rotSpeed: Math.random() * 2 - 1,
+                opacity: Math.random() * 0.5 + 0.4,
+                color: Math.random() > 0.4 ? '#fecdd3' : '#fb7185'
+            }));
+
+            function animatePetals() {
+                ctx.clearRect(0, 0, width, height);
+
+                petals.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.rotation += p.rotSpeed;
+
+                    if (p.y > height) {
+                        p.y = -20;
+                        p.x = Math.random() * width;
+                    }
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.globalAlpha = p.opacity;
+
+                    // Draw pink rose petal shape
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, p.size, p.size / 1.8, 0, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.restore();
+                });
+
+                requestAnimationFrame(animatePetals);
+            }
+
+            animatePetals();
+        }
+    </script>
+</body>
+</html>
